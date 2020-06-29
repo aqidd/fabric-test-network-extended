@@ -9,6 +9,9 @@ fi
 
 setOrdererGlobals $1
 
+# create output directory
+mkdir -p out
+
 peer channel fetch config ./out/config_block.pb -o $ORDERER_ADDRESS -c $2 --tls --cafile $TLS_ROOT_CA
 
 configtxlator proto_decode --input ./out/config_block.pb --type common.Block --output ./out/config_block.json
