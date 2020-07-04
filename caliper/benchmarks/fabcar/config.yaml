@@ -12,6 +12,7 @@
 # limitations under the License.
 #
 
+# rate controller (tps) docs https://hyperledger.github.io/caliper/v0.2/rate-controllers/
 ---
 test:
   workers:
@@ -26,7 +27,7 @@ test:
         unfinished_per_client: 5
     arguments:
       assets: 1000
-    callback: ${TEST_NETWORK_EXTENDED_DIR}/caliper/benchmarks/fabcar/changeCarOwner.js
+    callback: ./benchmarks/fabcar/changeCarOwner.js
   - label: Query all cars.
     txDuration: 30
     rateControl:
@@ -37,7 +38,7 @@ test:
       assets: 1000
       startKey: '1'
       endKey: '50'
-    callback: ${TEST_NETWORK_EXTENDED_DIR}/caliper/benchmarks/fabcar/queryAllCars.js
+    callback: ./benchmarks/fabcar/queryAllCars.js
   - label: Query a car.
     txDuration: 30
     rateControl:
@@ -46,14 +47,14 @@ test:
         unfinished_per_client: 5
     arguments:
       assets: 1000
-    callback: ${TEST_NETWORK_EXTENDED_DIR}/caliper/benchmarks/fabcar/queryCar.js
+    callback: ./benchmarks/fabcar/queryCar.js
   - label: Create a car.
     txDuration: 30
     rateControl:
       type: fixed-backlog
       opts:
         unfinished_per_client: 5
-    callback: ${TEST_NETWORK_EXTENDED_DIR}/caliper/benchmarks/fabcar/createCar.js
+    callback: ./benchmarks/fabcar/createCar.js
 monitor:
   type:
   - docker

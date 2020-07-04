@@ -14,4 +14,4 @@ sleep 3
 cd ${TEST_NETWORK_EXTENDED_DIR}
 
 # deploy to channel / language / version 
-./deployCC.sh mychannel golang 2
+./deployCC.sh mychannel golang 1

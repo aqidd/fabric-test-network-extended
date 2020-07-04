@@ -18,7 +18,7 @@ jq .data.data[0].payload.data.config ./out/config_block.json > ./out/config.json
 cp ./out/config.json ./out/modified_config.json
 
 setOrdererGlobals $1
-echo "{\"client_tls_cert\":\"$(cat $ORDERER_TLS | base64 -w 0)\",\"host\":\"orderer$1.example.com\",\"port\":7$150,\"server_tls_cert\":\"$(cat $ORDERER_TLS | base64 -w 0)\"}" > $PWD/out/ord$1consenter.json
+echo "{\"client_tls_cert\":\"$(cat $ORDERER_TLS | base64 -w 0)\",\"host\":\"orderer$1.example.com\",\"port\":7$150,\"server_tls_cert\":\"$(cat $ORDERER_TLS | base64 -w 0)\"}" > ./out/ord$1consenter.json
 
 jq ".channel_group.groups.Orderer.values.ConsensusType.value.metadata.consenters += [$(cat ./out/ord$1consenter.json)]" ./out/config.json > ./out/modified_config.json
 
