@@ -15,7 +15,6 @@ VERBOSE="$6"
 : ${VERBOSE:="false"}
 CC_SRC_LANGUAGE=`echo "$CC_SRC_LANGUAGE" | tr [:upper:] [:lower:]`
 
-FABRIC_SAMPLES_DIR=/home/aqid/fabric-samples
 FABRIC_CFG_PATH=${FABRIC_SAMPLES_DIR}/config/
 
 if [ "$CC_SRC_LANGUAGE" = "go" -o "$CC_SRC_LANGUAGE" = "golang" ] ; then

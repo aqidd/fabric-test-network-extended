@@ -12,4 +12,4 @@ jq .data.data[0].payload.data.config ./out/config_block.json > ./out/config.json
 
 jq -r .data.data[0].payload.data.config.channel_group.groups.Application.groups.${CORE_PEER_LOCALMSPID}.values.MSP.value.config.root_certs[0] ./out/config_block.json | base64 -d > root.pem
 
-openssl verify -CAfile root.pem /home/aqid/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+openssl verify -CAfile root.pem ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
