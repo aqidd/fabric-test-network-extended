@@ -57,7 +57,7 @@ function parsePeerConnectionParameters {
     PEERS="$PEERS $PEER"
     PEER_CONN_PARMS="$PEER_CONN_PARMS --peerAddresses $CORE_PEER_ADDRESS"
     ## Set path to TLS certificate
-    TLSINFO=$(eval echo "--tlsRootCertFiles \$PEER${_peer}_ORG${_org}_CA")
+    TLSINFO=$(eval echo "--tlsRootCertFiles \$CORE_PEER_TLS_ROOTCERT_FILE")
     PEER_CONN_PARMS="$PEER_CONN_PARMS $TLSINFO"
     # shift by one to get to the next organization
     shift
