@@ -12,48 +12,58 @@
 # limitations under the License.
 #
 
-# rate controller (tps) docs https://hyperledger.github.io/caliper/v0.2/rate-controllers/
+# rate controller (transaction per second) docs hyperledger.github.io/caliper/v0.2/rate-controllers/
+
 ---
 test:
   workers:
     type: local
     number: 5
   rounds:
-  - label: Change car owner.
-    txDuration: 30
+  - label: Random Transactions.
+    txDuration: 5
     rateControl:
-      type: fixed-backlog
+      type: fixed-rate
       opts:
-        unfinished_per_client: 5
+        tps: 10
     arguments:
-      assets: 1000
+      assets: 25
+    callback: ./benchmarks/fabcar/randomTx.js
+  - label: Change car owner.
+    txDuration: 5
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 10
+    arguments:
+      assets: 25
     callback: ./benchmarks/fabcar/changeCarOwner.js
   - label: Query all cars.
-    txDuration: 30
+    txDuration: 5
     rateControl:
-      type: fixed-backlog
+      type: fixed-rate
       opts:
-        unfinished_per_client: 5
+        tps: 10
     arguments:
-      assets: 1000
+      assets: 25
       startKey: '1'
       endKey: '50'
     callback: ./benchmarks/fabcar/queryAllCars.js
   - label: Query a car.
-    txDuration: 30
+    txDuration: 5
     rateControl:
-      type: fixed-backlog
+      type: fixed-rate
       opts:
-        unfinished_per_client: 5
+        tps: 10
     arguments:
-      assets: 1000
+      assets: 25
     callback: ./benchmarks/fabcar/queryCar.js
   - label: Create a car.
-    txDuration: 30
+    txDuration: 5
     rateControl:
-      type: fixed-backlog
+      type: fixed-rate
       opts:
-        unfinished_per_client: 5
+        tps: 10
     callback: ./benchmarks/fabcar/createCar.js
 monitor:
   type:
