@@ -38,9 +38,9 @@ clients:
         cryptoStore:
           path: /tmp/hfc-cvs/org1
       clientPrivateKey:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
       clientSignedCert:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
   client1.org1.example.com:
     client: 
       organization: Org1
@@ -49,9 +49,9 @@ clients:
         cryptoStore:
           path: /tmp/hfc-cvs/org1
       clientPrivateKey:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
       clientSignedCert:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
   client2.org1.example.com:
     client: 
       organization: Org1
@@ -60,9 +60,9 @@ clients:
         cryptoStore:
           path: /tmp/hfc-cvs/org1
       clientPrivateKey:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
       clientSignedCert:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
   client0.org2.example.com:
     client: 
       organization: Org2
@@ -71,9 +71,9 @@ clients:
         cryptoStore:
           path: /tmp/hfc-cvs/org2
       clientPrivateKey:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
       clientSignedCert:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
   client1.org2.example.com:
     client: 
       organization: Org2
@@ -82,9 +82,9 @@ clients:
         cryptoStore:
           path: /tmp/hfc-cvs/org2
       clientPrivateKey:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
       clientSignedCert:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
   client2.org2.example.com:
     client: 
       organization: Org2
@@ -93,13 +93,13 @@ clients:
         cryptoStore:
           path: /tmp/hfc-cvs/org2
       clientPrivateKey:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
       clientSignedCert:
-        path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
+        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
 
 channels:
   mychannel:
-    configBinary: fabric-samples/test-network/channel-artifacts/mychannel.tx
+    configBinary: ${FABRIC_SAMPLES_DIR}/test-network/channel-artifacts/mychannel.tx
     created: true
     orderers:
       - orderer.example.com
@@ -128,7 +128,7 @@ channels:
       - id: fabcar
         version: v0
         language: golang
-        path:  fabric-samples/chaincode/fabcar/go/
+        path:  ${FABRIC_SAMPLES_DIR}/chaincode/fabcar/go/
 
 organizations:
   Org1:
@@ -140,9 +140,9 @@ organizations:
     # certificateAuthorities:
     #   - ca.org1.example.com
     adminPrivateKey:
-      path: fabric-samples/test-network/organizations/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/priv_sk
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/priv_sk
     signedCert:
-      path: fabric-samples/test-network/organizations/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
 
   Org2:
     mspid: Org2MSP
@@ -153,9 +153,9 @@ organizations:
     # certificateAuthorities:
     #   - ca.org2.example.com
     adminPrivateKey:
-      path: fabric-samples/test-network/organizations/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/priv_sk
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/priv_sk
     signedCert:
-      path: fabric-samples/test-network/organizations/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
 
 orderers:
   orderer.example.com:
@@ -163,19 +163,19 @@ orderers:
     grpcOptions:
       ssl-target-name-override: orderer.example.com
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
   orderer1.example.com:
     url: grpcs://localhost:7150
     grpcOptions:
       ssl-target-name-override: orderer1.example.com
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/ordererOrganizations/example.com/orderers/orderer1.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/ordererOrganizations/example.com/orderers/orderer1.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
   orderer2.example.com:
     url: grpcs://localhost:7250
     grpcOptions:
       ssl-target-name-override: orderer2.example.com
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/ordererOrganizations/example.com/orderers/orderer2.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/ordererOrganizations/example.com/orderers/orderer2.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 peers:
   peer0.org1.example.com:
@@ -184,21 +184,21 @@ peers:
       ssl-target-name-override: peer0.org1.example.com
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
   peer1.org1.example.com:
     url: grpcs://localhost:7151
     grpcOptions:
       ssl-target-name-override: peer1.org1.example.com
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
   peer2.org1.example.com:
     url: grpcs://localhost:7251
     grpcOptions:
       ssl-target-name-override: peer2.org1.example.com
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/peers/peer2.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
 
   peer0.org2.example.com:
     url: grpcs://localhost:9051
@@ -206,21 +206,21 @@ peers:
       ssl-target-name-override: peer0.org2.example.com
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
   peer1.org2.example.com:
     url: grpcs://localhost:9151
     grpcOptions:
       ssl-target-name-override: peer1.org2.example.com
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
   peer2.org2.example.com:
     url: grpcs://localhost:9251
     grpcOptions:
       ssl-target-name-override: peer2.org2.example.com
       grpc.keepalive_time_ms: 600000
     tlsCACerts:
-      path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
+      path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/peers/peer2.org2.example.com/msp/tlscacerts/tlsca.org2.example.com-cert.pem
 
 # certificateAuthorities:
 #   ca.org1.example.com:
@@ -228,7 +228,7 @@ peers:
 #     httpOptions:
 #       verify: false
 #     tlsCACerts:
-#       path: fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+#       path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
 #     registrar:
 #       - enrollId: admin
 #         enrollSecret: adminpw
@@ -238,7 +238,7 @@ peers:
 #     httpOptions:
 #       verify: false
 #     tlsCACerts:
-#       path: fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
+#       path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
 #     registrar:
 #       - enrollId: admin
 #         enrollSecret: adminpw
