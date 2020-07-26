@@ -7,7 +7,7 @@ if [ -d "${FABRIC_SAMPLES_DIR}" ]; then
     sudo rm -rf fabric-samples
 fi
 
-mkdir ${FABRIC_SAMPLES_DIR}
+mkdir $(echo ${FABRIC_SAMPLES_DIR})
 cd ${FABRIC_SAMPLES_DIR}
 cd ..
 
