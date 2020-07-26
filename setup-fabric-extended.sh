@@ -1,9 +1,15 @@
 #!/bin/bash
 
 # remove existing samples folder (if any)
+if [ -d "${FABRIC_SAMPLES_DIR}" ]; then    
+    cd ${FABRIC_SAMPLES_DIR}
+    cd ..
+    sudo rm -rf fabric-samples
+fi
+
+mkdir ${FABRIC_SAMPLES_DIR}
 cd ${FABRIC_SAMPLES_DIR}
 cd ..
-sudo rm -rf fabric-samples
 
 # install latest fabric and docker containers
 curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.1.0 1.4.7 0.4.18
