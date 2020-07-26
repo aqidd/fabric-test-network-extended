@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# remove existing setup
-docker stop $(docker ps -aq)
-docker system prune -af --volumes
-
+# remove existing samples folder (if any)
 sudo rm -rf fabric-samples
 
 # install latest fabric and docker containers
