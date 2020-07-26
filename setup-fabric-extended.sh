@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # remove existing samples folder (if any)
+cd ${FABRIC_SAMPLES_DIR}
+cd ..
 sudo rm -rf fabric-samples
 
 # install latest fabric and docker containers
@@ -12,11 +14,12 @@ export $(egrep -v '^#' .env | xargs)
 export PATH=${FABRIC_SAMPLES_DIR}/bin:$PATH
 export FABRIC_CFG_PATH=${FABRIC_SAMPLES_DIR}/config
 
-cd fabric-samples
+cd ${FABRIC_SAMPLES_DIR}
 cd test-network
 
 ./network.sh up
 ./network.sh createChannel -c mychannel
 ./network.sh deployCC -l javascript
 
+cd ${TEST_NETWORK_EXTENDED_DIR}
 ./extend-network.sh
