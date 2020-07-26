@@ -1,4 +1,6 @@
+.env
 node_modules
 out
+fabric-samples
 caliper/caliper.log
 caliper/report.html

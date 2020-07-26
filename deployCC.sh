@@ -288,21 +288,17 @@ approveForMyOrg 1 1
 echo "====DEFINITION APPROVAL FOR ORG 1 PEER 2===="
 approveForMyOrg 1 2
 
-sleep 3
-
 # check whether the chaincode definition is ready to be committed
 # expect org1 to have approved and org2 not to
-echo "====COMMIT READINESS FOR ORG 1 PEER 1===="
-checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": false"
-
-echo "====COMMIT READINESS FOR ORG 1 PEER 2===="
-checkCommitReadiness 1 2 "\"Org1MSP\": true" "\"Org2MSP\": false"
-
-echo "====COMMIT READINESS FOR ORG 2 PEER 1===="
-checkCommitReadiness 2 1 "\"Org1MSP\": true" "\"Org2MSP\": false"
-
-echo "====COMMIT READINESS FOR ORG 2 PEER 2===="
-checkCommitReadiness 2 2 "\"Org1MSP\": true" "\"Org2MSP\": false"
+# skip commit readiness check for faster process
+# echo "====COMMIT READINESS FOR ORG 1 PEER 1===="
+# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": false"
+# echo "====COMMIT READINESS FOR ORG 1 PEER 2===="
+# checkCommitReadiness 1 2 "\"Org1MSP\": true" "\"Org2MSP\": false"
+# echo "====COMMIT READINESS FOR ORG 2 PEER 1===="
+# checkCommitReadiness 2 1 "\"Org1MSP\": true" "\"Org2MSP\": false"
+# echo "====COMMIT READINESS FOR ORG 2 PEER 2===="
+# checkCommitReadiness 2 2 "\"Org1MSP\": true" "\"Org2MSP\": false"
 
 ## now approve also for org2
 approveForMyOrg 2 1
@@ -310,10 +306,11 @@ approveForMyOrg 2 2
 
 # check whether the chaincode definition is ready to be committed
 # expect them both to have approved
-checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true"
-checkCommitReadiness 1 2 "\"Org1MSP\": true" "\"Org2MSP\": true"
-checkCommitReadiness 2 1 "\"Org1MSP\": true" "\"Org2MSP\": true"
-checkCommitReadiness 2 2 "\"Org1MSP\": true" "\"Org2MSP\": true"
+# skip commit readiness check for faster process
+# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true"
+# checkCommitReadiness 1 2 "\"Org1MSP\": true" "\"Org2MSP\": true"
+# checkCommitReadiness 2 1 "\"Org1MSP\": true" "\"Org2MSP\": true"
+# checkCommitReadiness 2 2 "\"Org1MSP\": true" "\"Org2MSP\": true"
 
 ## now that we know for sure both orgs have approved, commit the definition
 ## params ORG:PEER
@@ -327,8 +324,6 @@ queryCommitted 2 2
 
 ## Invoke the chaincode
 chaincodeInvokeInit 1:1 1:2 2:1 2:2
-
-sleep 10
 
 # Query chaincode
 echo "Querying chaincode on peer1.org1..."
