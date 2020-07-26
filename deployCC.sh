@@ -67,10 +67,10 @@ packageChaincode() {
   PEER=$2
   setPeerEnv $ORG $PEER
   set -x
-  peer lifecycle chaincode package fabcar.tar.gz --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} --label fabcar_${VERSION} >&log.txt
+  peer lifecycle chaincode package out/fabcar.tar.gz --path ${CC_SRC_PATH} --lang ${CC_RUNTIME_LANGUAGE} --label fabcar_${VERSION} >&out/log.txt
   res=$?
   set +x
-  cat log.txt
+  cat out/log.txt
   verifyResult $res "Chaincode packaging on peer${PEER}.org${ORG} has failed"
   echo "===================== Chaincode is packaged on peer${PEER}.org${ORG} ===================== "
   echo
@@ -82,10 +82,10 @@ installChaincode() {
   PEER=$2
   setPeerEnv $ORG $PEER
   set -x
-  peer lifecycle chaincode install fabcar.tar.gz >&log.txt
+  peer lifecycle chaincode install out/fabcar.tar.gz >&out/log.txt
   res=$?
   set +x
-  cat log.txt
+  cat out/log.txt
   verifyResult $res "Chaincode installation on peer${PEER}.org${ORG} has failed"
   echo "===================== Chaincode is installed on peer${PEER}.org${ORG} ===================== "
   echo
@@ -97,11 +97,11 @@ queryInstalled() {
   PEER=$2
   setPeerEnv $ORG $PEER
   set -x
-  peer lifecycle chaincode queryinstalled >&log.txt
+  peer lifecycle chaincode queryinstalled >&out/log.txt
   res=$?
   set +x
-  cat log.txt
-	PACKAGE_ID=$(sed -n "/fabcar_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" log.txt)
+  cat out/log.txt
+	PACKAGE_ID=$(sed -n "/fabcar_${VERSION}/{s/^Package ID: //; s/, Label:.*$//; p;}" out/log.txt)
   verifyResult $res "Query installed on peer${PEER}.org${ORG} has failed"
   echo PackageID is ${PACKAGE_ID}
   echo "===================== Query installed successful on peer${PEER}.org${ORG} on channel ===================== "
@@ -114,9 +114,9 @@ approveForMyOrg() {
   PEER=$2
   setPeerEnv $ORG $PEER
   set -x
-  peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name fabcar --version ${VERSION} --init-required --package-id ${PACKAGE_ID} --sequence ${VERSION} >&log.txt
+  peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name fabcar --version ${VERSION} --init-required --package-id ${PACKAGE_ID} --sequence ${VERSION} >&out/log.txt
   set +x
-  cat log.txt
+  cat out/log.txt
   verifyResult $res "Chaincode definition approved on peer${PEER}.org${ORG} on channel '$CHANNEL_NAME' failed"
   echo "===================== Chaincode definition approved on peer${PEER}.org${ORG} on channel '$CHANNEL_NAME' ===================== "
   echo
@@ -137,17 +137,17 @@ checkCommitReadiness() {
     sleep $DELAY
     echo "Attempting to check the commit readiness of the chaincode definition on peer${PEER}.org${ORG} secs"
     set -x
-    peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME --name fabcar --version ${VERSION} --sequence ${VERSION} --output json --init-required >&log.txt
+    peer lifecycle chaincode checkcommitreadiness --channelID $CHANNEL_NAME --name fabcar --version ${VERSION} --sequence ${VERSION} --output json --init-required >&out/log.txt
     res=$?
     set +x
     let rc=0
     for var in "$@"
     do
-      grep "$var" log.txt &>/dev/null || let rc=1
+      grep "$var" out/log.txt &>/dev/null || let rc=1
     done
 		COUNTER=$(expr $COUNTER + 1)
 	done
-  cat log.txt
+  cat out/log.txt
   if test $rc -eq 0; then
     echo "===================== Checking the commit readiness of the chaincode definition successful on peer${PEER}.org${ORG} on channel '$CHANNEL_NAME' ===================== "
   else
@@ -167,10 +167,10 @@ commitChaincodeDefinition() {
   # peer (if join was successful), let's supply it directly as we know
   # it using the "-o" option
   set -x
-  peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name fabcar $PEER_CONN_PARMS --version ${VERSION} --sequence ${VERSION} --init-required >&log.txt
+  peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA --channelID $CHANNEL_NAME --name fabcar $PEER_CONN_PARMS --version ${VERSION} --sequence ${VERSION} --init-required >&out/log.txt
   res=$?
   set +x
-  cat log.txt
+  cat out/log.txt
   verifyResult $res "Chaincode definition commit failed on peer0.org${ORG} on channel '$CHANNEL_NAME' failed"
   echo "===================== Chaincode definition committed on channel '$CHANNEL_NAME' ===================== "
   echo
@@ -191,15 +191,15 @@ queryCommitted() {
     sleep $DELAY
     echo "Attempting to Query committed status on peer${PEER}.org${ORG}, Retry after $DELAY seconds."
     set -x
-    peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME --name fabcar >&log.txt
+    peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME --name fabcar >&out/log.txt
     res=$?
     set +x
-		test $res -eq 0 && VALUE=$(cat log.txt | grep -o '^Version: [0-9], Sequence: [0-9], Endorsement Plugin: escc, Validation Plugin: vscc')
+		test $res -eq 0 && VALUE=$(cat out/log.txt | grep -o '^Version: [0-9], Sequence: [0-9], Endorsement Plugin: escc, Validation Plugin: vscc')
     test "$VALUE" = "$EXPECTED_RESULT" && let rc=0
 		COUNTER=$(expr $COUNTER + 1)
 	done
   echo
-  cat log.txt
+  cat out/log.txt
   if test $rc -eq 0; then
     echo "===================== Query chaincode definition successful on peer${PEER}.org${ORG} on channel '$CHANNEL_NAME' ===================== "
 		echo
@@ -219,10 +219,10 @@ chaincodeInvokeInit() {
   # peer (if join was successful), let's supply it directly as we know
   # it using the "-o" option
   set -x
-  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n fabcar $PEER_CONN_PARMS --isInit -c '{"function":"initLedger","Args":[]}' >&log.txt
+  peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n fabcar $PEER_CONN_PARMS --isInit -c '{"function":"initLedger","Args":[]}' >&out/log.txt
   res=$?
   set +x
-  cat log.txt
+  cat out/log.txt
   verifyResult $res "Invoke execution on $PEERS failed "
   echo "===================== Invoke transaction successful on $PEERS on channel '$CHANNEL_NAME' ===================== "
   echo
@@ -241,14 +241,14 @@ chaincodeQuery() {
     sleep $DELAY
     echo "Attempting to Query peer${PEER}.org${ORG} ...$(($(date +%s) - starttime)) secs"
     set -x
-    peer chaincode query -C $CHANNEL_NAME -n fabcar -c '{"Args":["queryAllCars"]}' >&log.txt
+    peer chaincode query -C $CHANNEL_NAME -n fabcar -c '{"Args":["queryAllCars"]}' >&out/log.txt
     res=$?
     set +x
 		let rc=$res
 		COUNTER=$(expr $COUNTER + 1)
 	done
   echo
-  cat log.txt
+  cat out/log.txt
   if test $rc -eq 0; then
     echo "===================== Query successful on peer${PEER}.org${ORG} on channel '$CHANNEL_NAME' ===================== "
 		echo
