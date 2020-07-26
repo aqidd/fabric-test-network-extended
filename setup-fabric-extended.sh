@@ -9,9 +9,10 @@ if [ -d "${FABRIC_SAMPLES_DIR}" ]; then
     sudo rm -rf fabric-samples
 fi
 
+# roundabout way to create proper path but whatever
 mkdir $(echo ${FABRIC_SAMPLES_DIR})
 cd ${FABRIC_SAMPLES_DIR}
-cd ..
+cd .. && rm -rf fabric-samples
 
 # install latest fabric and docker containers
 curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.1.0 1.4.7 0.4.18
