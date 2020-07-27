@@ -283,47 +283,11 @@ echo "====QUERY INSTALLATION FOR ORG 2 PEER 2===="
 queryInstalled 2 2
 
 ## approve the definition for org1
-echo "====DEFINITION APPROVAL FOR ORG 1 PEER 1===="
 approveForMyOrg 1 1
-echo "====DEFINITION APPROVAL FOR ORG 1 PEER 2===="
 approveForMyOrg 1 2
-
-# check whether the chaincode definition is ready to be committed
-# expect org1 to have approved and org2 not to
-# skip commit readiness check for faster process
-# echo "====COMMIT READINESS FOR ORG 1 PEER 1===="
-# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": false"
-# echo "====COMMIT READINESS FOR ORG 1 PEER 2===="
-# checkCommitReadiness 1 2 "\"Org1MSP\": true" "\"Org2MSP\": false"
-# echo "====COMMIT READINESS FOR ORG 2 PEER 1===="
-# checkCommitReadiness 2 1 "\"Org1MSP\": true" "\"Org2MSP\": false"
-# echo "====COMMIT READINESS FOR ORG 2 PEER 2===="
-# checkCommitReadiness 2 2 "\"Org1MSP\": true" "\"Org2MSP\": false"
-
 ## now approve also for org2
 approveForMyOrg 2 1
 approveForMyOrg 2 2
-
-# check whether the chaincode definition is ready to be committed
-# expect them both to have approved
-# skip commit readiness check for faster process
-# checkCommitReadiness 1 1 "\"Org1MSP\": true" "\"Org2MSP\": true"
-# checkCommitReadiness 1 2 "\"Org1MSP\": true" "\"Org2MSP\": true"
-# checkCommitReadiness 2 1 "\"Org1MSP\": true" "\"Org2MSP\": true"
-# checkCommitReadiness 2 2 "\"Org1MSP\": true" "\"Org2MSP\": true"
-
-## now that we know for sure both orgs have approved, commit the definition
-## params ORG:PEER
-commitChaincodeDefinition 1:1 1:2 2:1 2:2
-
-## query on both orgs to see that the definition committed successfully
-queryCommitted 1 1
-queryCommitted 1 2
-queryCommitted 2 1
-queryCommitted 2 2
-
-## Invoke the chaincode
-chaincodeInvokeInit 1:1 1:2 2:1 2:2
 
 # Query chaincode
 echo "Querying chaincode on peer1.org1..."
