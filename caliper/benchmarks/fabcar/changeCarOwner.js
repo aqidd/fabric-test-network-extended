@@ -14,7 +14,8 @@
 
 'use strict';
 
-module.exports.info = 'Changing car owner.';
+const name = 'Changing car owner.';
+module.exports.info = name;
 
 const helper = require('./helper');
 
@@ -29,7 +30,7 @@ module.exports.init = async function(blockchain, context, args) {
 
     console.log(`===entering changeCarOwner.js===`)
     try {
-        await helper.createCar(bc, contx, args);   
+        await helper.createCar(bc, contx, args, name.hashCode());   
     } catch (error) {
         console.error(error)
         return Promise.reject(error)
@@ -41,7 +42,7 @@ module.exports.init = async function(blockchain, context, args) {
 
 module.exports.run = function() {
     txIndex++;
-    let carNumber = 'Client' + contx.clientIdx + '_CAR' + txIndex.toString();
+    let carNumber = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + txIndex.toString();
     let newCarOwner = owners[Math.floor(Math.random() * owners.length)];
 
     let args = {

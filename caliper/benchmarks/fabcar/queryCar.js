@@ -14,7 +14,8 @@
 
 'use strict';
 
-module.exports.info = 'Querying a car.';
+const name = 'Querying a car.'
+module.exports.info = name;
 
 const helper = require('./helper');
 
@@ -26,14 +27,14 @@ module.exports.init = async function(blockchain, context, args) {
     contx = context;
     limitIndex = args.assets;
 
-    await helper.createCar(bc, contx, args);
+    await helper.createCar(bc, contx, args, name.hashCode());
 
     return Promise.resolve();
 };
 
 module.exports.run = function() {
     txIndex++;
-    let carNumber = 'Client' + contx.clientIdx + '_CAR' + txIndex.toString();
+    let carNumber = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + txIndex.toString();
 
     let args = {
         chaincodeFunction: 'queryCar',

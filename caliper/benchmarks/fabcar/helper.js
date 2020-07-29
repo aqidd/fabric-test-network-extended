@@ -22,11 +22,22 @@ let owners = ['Tomoko', 'Brad', 'Jin Soo', 'Max', 'Adrianna', 'Michel', 'Aarav',
 let carNumber;
 let txIndex = 0;
 
-module.exports.createCar = async function (bc, contx, args, color, make, model, owner) {
+String.prototype.hashCode = function(){
+	var hash = 0;
+	if (this.length == 0) return hash;
+	for (var i = 0; i < this.length; i++) {
+		var char = this.charCodeAt(i);
+		hash = ((hash<<5)-hash)+char;
+		hash = hash & hash; // Convert to 32bit integer
+	}
+	return hash;
+}
+
+module.exports.createCar = async function (bc, contx, args, hash, color, make, model, owner) {
 
     while (txIndex < args.assets) {
         txIndex++;
-        carNumber = 'Client' + contx.clientIdx + '_CAR' + txIndex.toString();
+        carNumber = 'Client' + contx.clientIdx + '_CAR' + hash + txIndex.toString();
         color = colors[Math.floor(Math.random() * colors.length)];
         make = makes[Math.floor(Math.random() * makes.length)];
         model = models[Math.floor(Math.random() * models.length)];

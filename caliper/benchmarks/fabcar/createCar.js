@@ -14,7 +14,8 @@
 
 'use strict';
 
-module.exports.info = 'Creating cars.';
+const name = 'Creating cars.';
+module.exports.info = name;
 
 let txIndex = 0;
 let colors = ['blue', 'red', 'green', 'yellow', 'black', 'purple', 'white', 'violet', 'indigo', 'brown'];
@@ -32,7 +33,7 @@ module.exports.init = function(blockchain, context, args) {
 
 module.exports.run = function() {
     txIndex++;
-    let carNumber = 'Client' + contx.clientIdx + '_CAR' + txIndex.toString();
+    let carNumber = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + txIndex.toString();
     let carColor = colors[Math.floor(Math.random() * colors.length)];
     let carMake = makes[Math.floor(Math.random() * makes.length)];
     let carModel = models[Math.floor(Math.random() * models.length)];

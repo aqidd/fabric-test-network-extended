@@ -21,7 +21,7 @@ test:
     number: 5
   rounds:
   - label: Random Transactions.
-    txDuration: 5
+    txDuration: 10
     rateControl:
       type: fixed-rate
       opts:
@@ -30,7 +30,7 @@ test:
       assets: 25
     callback: ./benchmarks/fabcar/randomTx.js
   - label: Change car owner.
-    txDuration: 5
+    txDuration: 10
     rateControl:
       type: fixed-rate
       opts:
@@ -39,7 +39,7 @@ test:
       assets: 25
     callback: ./benchmarks/fabcar/changeCarOwner.js
   - label: Query all cars.
-    txDuration: 5
+    txDuration: 10
     rateControl:
       type: fixed-rate
       opts:
@@ -50,7 +50,7 @@ test:
       endKey: '50'
     callback: ./benchmarks/fabcar/queryAllCars.js
   - label: Query a car.
-    txDuration: 5
+    txDuration: 10
     rateControl:
       type: fixed-rate
       opts:
@@ -59,7 +59,7 @@ test:
       assets: 25
     callback: ./benchmarks/fabcar/queryCar.js
   - label: Create a car.
-    txDuration: 5
+    txDuration: 10
     rateControl:
       type: fixed-rate
       opts:

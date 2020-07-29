@@ -14,7 +14,8 @@
 
 'use strict';
 
-module.exports.info = 'Querying all cars.';
+const name = 'Querying all cars.';
+module.exports.info = name;
 
 const helper = require('./helper');
 
@@ -24,7 +25,7 @@ module.exports.init = async function (blockchain, context, args) {
     bc = blockchain;
     contx = context;
 
-    await helper.createCar(bc, contx, args);
+    await helper.createCar(bc, contx, args, name.hashCode());
 
     startingKey = 'Client' + contx.clientIdx + '_CAR' + args.startKey;
     endingKey = 'Client' + contx.clientIdx + '_CAR' + args.endKey;
