@@ -20,22 +20,22 @@ module.exports.run = function () {
     let tx
     switch (randoSeed) {
         case 0:
-            tx = changeCarOwner.run()
+            tx = changeCarOwner
             break
         case 1:
-            tx = createCar.run()
+            tx = createCar
             break
         case 2:
-            tx = queryCar.run()
+            tx = queryCar
             break
         case 3:
-            tx = queryAllCars.run()
+            tx = queryAllCars
             break
         default:
             console.error('RANDOM ERROR HAPPENED')
             break
     }
-    return queryAllCars.run()
+    return tx.run()
 };
 
 module.exports.end = async function () {

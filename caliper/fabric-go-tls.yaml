@@ -62,17 +62,23 @@ channels:
       - orderer1.example.com
       - orderer2.example.com
     peers:
-      - peer0.org1.example.com
-      - peer1.org1.example.com
-      - peer2.org1.example.com
-      - peer0.org2.example.com
-      - peer1.org2.example.com
-      - peer2.org2.example.com
+      peer0.org1.example.com:
+        endorsingPeer: true
+      peer1.org1.example.com:
+        endorsingPeer: true
+      peer2.org1.example.com:
+        endorsingPeer: true
+      peer0.org2.example.com:
+        endorsingPeer: true
+      peer1.org2.example.com:
+        endorsingPeer: true
+      peer2.org2.example.com:
+        endorsingPeer: true
 
     chaincodes:
       - id: fabcar
         version: v1.0
-        language: javascript
+        language: node
         path:  ${FABRIC_SAMPLES_DIR}/chaincode/fabcar/javascript/
 
 organizations:
