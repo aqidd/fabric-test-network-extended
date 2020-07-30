@@ -41,51 +41,7 @@ clients:
         path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
       clientSignedCert:
         path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
-  client1.org1.example.com:
-    client: 
-      organization: Org1
-      credentialStore:
-        path: /tmp/hfc-kvs/org1
-        cryptoStore:
-          path: /tmp/hfc-cvs/org1
-      clientPrivateKey:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
-      clientSignedCert:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
-  client2.org1.example.com:
-    client: 
-      organization: Org1
-      credentialStore:
-        path: /tmp/hfc-kvs/org1
-        cryptoStore:
-          path: /tmp/hfc-cvs/org1
-      clientPrivateKey:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/priv_sk
-      clientSignedCert:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
   client0.org2.example.com:
-    client: 
-      organization: Org2
-      credentialStore:
-        path: /tmp/hfc-kvs/org2
-        cryptoStore:
-          path: /tmp/hfc-cvs/org2
-      clientPrivateKey:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
-      clientSignedCert:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
-  client1.org2.example.com:
-    client: 
-      organization: Org2
-      credentialStore:
-        path: /tmp/hfc-kvs/org2
-        cryptoStore:
-          path: /tmp/hfc-cvs/org2
-      clientPrivateKey:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/keystore/priv_sk
-      clientSignedCert:
-        path: ${FABRIC_SAMPLES_DIR}/test-network/organizations/peerOrganizations/org2.example.com/users/User1@org2.example.com/msp/signcerts/User1@org2.example.com-cert.pem
-  client2.org2.example.com:
     client: 
       organization: Org2
       credentialStore:
@@ -106,29 +62,18 @@ channels:
       - orderer1.example.com
       - orderer2.example.com
     peers:
-      peer0.org1.example.com:
-        eventSource: true
-      peer1.org1.example.com:
-        eventSource: true
-      peer2.org1.example.com:
-        eventSource: true
-      peer0.org2.example.com:
-        eventSource: true
-      peer1.org2.example.com:
-        eventSource: true
-      peer2.org2.example.com:
-        eventSource: true
+      - peer0.org1.example.com
+      - peer1.org1.example.com
+      - peer2.org1.example.com
+      - peer0.org2.example.com
+      - peer1.org2.example.com
+      - peer2.org2.example.com
 
     chaincodes:
-      # - id: marbles
-      #   version: v0
-      #   language: golang
-      #   path: fabric/samples/marbles/go
-      #   metadataPath: src/fabric/samples/marbles/go/metadata
       - id: fabcar
-        version: v0
-        language: golang
-        path:  ${FABRIC_SAMPLES_DIR}/chaincode/fabcar/go/
+        version: v1.0
+        language: javascript
+        path:  ${FABRIC_SAMPLES_DIR}/chaincode/fabcar/javascript/
 
 organizations:
   Org1:

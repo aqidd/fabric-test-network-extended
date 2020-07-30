@@ -27,8 +27,8 @@ module.exports.init = async function (blockchain, context, args) {
 
     await helper.createCar(bc, contx, args, name.hashCode());
 
-    startingKey = 'Client' + contx.clientIdx + '_CAR' + args.startKey;
-    endingKey = 'Client' + contx.clientIdx + '_CAR' + args.endKey;
+    startingKey = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + args.startKey;
+    endingKey = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + args.endKey;
 
     return Promise.resolve();
 };
