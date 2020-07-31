@@ -17,6 +17,8 @@
 const name = 'Creating cars.';
 module.exports.info = name;
 
+const helper = require('./helper');
+
 let txIndex = 0;
 let colors = ['blue', 'red', 'green', 'yellow', 'black', 'purple', 'white', 'violet', 'indigo', 'brown'];
 let makes = ['Toyota', 'Ford', 'Hyundai', 'Volkswagen', 'Tesla', 'Peugeot', 'Chery', 'Fiat', 'Tata', 'Holden'];

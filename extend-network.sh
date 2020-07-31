@@ -14,4 +14,4 @@ sleep 3
 cd ${TEST_NETWORK_EXTENDED_DIR}
 
 # deploy to channel / language / version
-./redeployCC.sh mychannel javascript 1
+./deployCC.sh mychannel javascript 1

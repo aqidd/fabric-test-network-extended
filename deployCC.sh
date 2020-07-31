@@ -260,26 +260,22 @@ chaincodeQuery() {
 }
 
 ## at first we package the chaincode
-packageChaincode 1 1
+packageChaincode 1 0
 
 ## Install chaincode on peer
-echo "Installing chaincode on peer1.org1..."
+installChaincode 1 0
 installChaincode 1 1
-echo "Installing chaincode on peer2.org1..."
 installChaincode 1 2
-echo "Install chaincode on peer1.org2..."
+installChaincode 2 0
 installChaincode 2 1
-echo "Install chaincode on peer2.org2..."
 installChaincode 2 2
 
 ## query whether the chaincode is installed
-echo "====QUERY INSTALLATION FOR ORG 1 PEER 1===="
+queryInstalled 1 0
 queryInstalled 1 1
-echo "====QUERY INSTALLATION FOR ORG 1 PEER 2===="
 queryInstalled 1 2
-echo "====QUERY INSTALLATION FOR ORG 2 PEER 1===="
+queryInstalled 2 0
 queryInstalled 2 1
-echo "====QUERY INSTALLATION FOR ORG 2 PEER 2===="
 queryInstalled 2 2
 
 ## approve the definition for org1
@@ -289,14 +285,25 @@ approveForMyOrg 1 2
 approveForMyOrg 2 1
 approveForMyOrg 2 2
 
+commitChaincodeDefinition 1:0 1:1 1:2 2:0 2:1 2:2
+
+queryCommitted 1 0
+queryCommitted 1 1
+queryCommitted 1 2
+queryCommitted 2 0
+queryCommitted 2 1
+queryCommitted 2 2
+
+chaincodeInvokeInit 1:0 1:1 1:2 2:0 2:1 2:2
+
+sleep 10
+
 # Query chaincode
-echo "Querying chaincode on peer1.org1..."
+chaincodeQuery 1 0
 chaincodeQuery 1 1
-echo "Querying chaincode on peer2.org1..."
 chaincodeQuery 1 2
-echo "Querying chaincode on peer1.org2..."
+chaincodeQuery 2 0
 chaincodeQuery 2 1
-echo "Querying chaincode on peer2.org2..."
 chaincodeQuery 2 2
 
 exit 0
