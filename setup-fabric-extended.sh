@@ -26,7 +26,6 @@ cd test-network
 
 ./network.sh up
 ./network.sh createChannel -c mychannel
-./network.sh deployCC -l javascript
 
 cd ${TEST_NETWORK_EXTENDED_DIR}
 ./extend-network.sh
