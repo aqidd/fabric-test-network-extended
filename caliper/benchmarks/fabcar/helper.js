@@ -14,6 +14,8 @@
 
 'use strict';
 
+const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('helper-module');
+
 let colors = ['blue', 'red', 'green', 'yellow', 'black', 'purple', 'white', 'violet', 'indigo', 'brown'];
 let makes = ['Toyota', 'Ford', 'Hyundai', 'Volkswagen', 'Tesla', 'Peugeot', 'Chery', 'Fiat', 'Tata', 'Holden'];
 let models = ['Prius', 'Mustang', 'Tucson', 'Passat', 'S', '205', 'S22L', 'Punto', 'Nano', 'Barina'];
@@ -48,8 +50,13 @@ module.exports.createCar = async function (bc, contx, args, hash, color, make, m
             chaincodeArguments: [carNumber, make, model, color, owner]
         };
         console.log(`====${JSON.stringify(myArgs)}====`)
-        const res = await bc.invokeSmartContract(contx, 'fabcar', 'v1', myArgs, 30);
-        console.log(`=== invoking smart contract result: ${JSON.stringify(res)} ===`)
+        try {
+            const res = await bc.invokeSmartContract(contx, 'fabcar', 'v1', myArgs, 30);
+            console.log(`=== invoking smart contract result: ${JSON.stringify(res)} ===`)  
+            logger.debug(`===HELPER${hash} SMART CONTRACT RESULT for ${carNumber}==`, JSON.stringify(res)); 
+        } catch (error) {
+            logger.debug(`===HELPER${hash} FAILED TO CREATE ${carNumber}==`, error);
+        }
     }
 
 };

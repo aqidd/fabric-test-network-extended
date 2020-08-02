@@ -3,6 +3,8 @@ const createCar = require('./createCar')
 const queryCar = require('./queryCar')
 const queryAllCars = require('./queryAllCars')
 
+const logger = require('@hyperledger/caliper-core').CaliperUtils.getLogger('randomtx-module');
+
 module.exports.info = 'Random Transaction Combinations';
 
 module.exports.init = async function (blockchain, context, args) {
@@ -32,7 +34,7 @@ module.exports.run = function () {
             tx = queryAllCars
             break
         default:
-            console.error('RANDOM ERROR HAPPENED')
+            logger.debug('===RANDOM ERROR HAPPENED===')
             break
     }
     return tx.run()
