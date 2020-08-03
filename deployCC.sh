@@ -278,6 +278,9 @@ queryInstalled 2 0
 queryInstalled 2 1
 queryInstalled 2 2
 
+# wait for everything to settle
+sleep 3
+
 ## approve the definition for org1
 approveForMyOrg 1 1
 approveForMyOrg 1 2
