@@ -25,6 +25,10 @@ cd ${FABRIC_SAMPLES_DIR}
 cd test-network
 
 ./network.sh up
+
+# wait for everything to settle
+sleep 3
+
 ./network.sh createChannel -c mychannel
 
 cd ${TEST_NETWORK_EXTENDED_DIR}
