@@ -278,19 +278,20 @@ queryInstalled 2 0
 queryInstalled 2 1
 queryInstalled 2 2
 
-# wait for everything to settle
-sleep 3
+# majority of channel members need to approve a chaincode before it can used on a channel
+# only need to target 1 peer, other will follow via gossip
 
 ## approve the definition for org1
 approveForMyOrg 1 1
-approveForMyOrg 1 2
 
-# wait for everything to settle
+# wait for gossip to settle 
 sleep 3
 
 ## now approve also for org2
 approveForMyOrg 2 1
-approveForMyOrg 2 2
+
+# wait for gossip to settle
+sleep 3
 
 commitChaincodeDefinition 1:0 1:1 1:2 2:0 2:1 2:2
 
