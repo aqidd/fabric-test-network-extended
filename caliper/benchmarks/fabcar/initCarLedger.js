@@ -30,7 +30,8 @@ module.exports.init = async function(blockchain, context, args) {
     bc = blockchain
     contx = context
     let assets = args.assets
-
+    let promises = []
+    
     while(assets >= 0) {
         const carNumber = helper.generateNumber(context.clientIdx, assets);
         const color = colors[Math.floor(Math.random() * colors.length)];
@@ -38,7 +39,6 @@ module.exports.init = async function(blockchain, context, args) {
         const model = models[Math.floor(Math.random() * models.length)];
         const owner = owners[Math.floor(Math.random() * owners.length)];
         
-        let promises = []
         const myArgs = {
             chaincodeFunction: 'createCar',
             chaincodeArguments: [carNumber, make, model, color, owner]
