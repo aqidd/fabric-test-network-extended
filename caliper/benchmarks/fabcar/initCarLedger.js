@@ -37,21 +37,19 @@ module.exports.init = async function(blockchain, context, args) {
         const make = makes[Math.floor(Math.random() * makes.length)];
         const model = models[Math.floor(Math.random() * models.length)];
         const owner = owners[Math.floor(Math.random() * owners.length)];
-    
+        
+        let promises = []
         const myArgs = {
             chaincodeFunction: 'createCar',
             chaincodeArguments: [carNumber, make, model, color, owner]
         };
-        try {
-            const res = await bc.invokeSmartContract(context, 'fabcar', 'v1', myArgs, 30);
-            console.log(`=== invoking smart contract result: ${JSON.stringify(res)} ===`)  
-            logger.debug(`===RESULT for ${carNumber}==`, JSON.stringify(res)); 
-        } catch (error) {
-            logger.debug(`===FAILED TO CREATE ${carNumber}==`, error);
-        }
+        
+        promises.push(bc.invokeSmartContract(context, 'fabcar', 'v1', myArgs, 30));
+
         assets--;
     }
-
+    const res = await Promise.all(promises)
+    logger.debug(`===INITIALIZATION RESULT SIZE ${res.length}===`)
     return Promise.resolve();
 };
 
