@@ -28,6 +28,7 @@ test:
         tps: 1
     arguments:
       assets: 25
+    callback: ./benchmarks/fabcar/initCarLedger.js
   - label: Random Transactions.
     txDuration: 10
     rateControl:
