@@ -28,24 +28,16 @@ module.exports.init = async function(blockchain, context, args) {
     contx = context;
     clientArgs = args;
 
-    console.log(`===entering changeCarOwner.js===`)
-    try {
-        await helper.createCar(bc, contx, args, name.hashCode());   
-    } catch (error) {
-        console.error(error)
-        return Promise.reject(error)
-    }
-    console.log(`===leaving changeCarOwner.js init====`)
     return Promise.resolve();
-
 };
 
 module.exports.run = function() {
     txIndex++;
-    let carNumber = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + txIndex.toString();
-    let newCarOwner = owners[Math.floor(Math.random() * owners.length)];
+    
+    const carNumber =  helper.generateNumber(contx.clientIdx, txIndex);
+    const newCarOwner = owners[Math.floor(Math.random() * owners.length)];
 
-    let args = {
+    const args = {
         chaincodeFunction: 'changeCarOwner',
         chaincodeArguments: [carNumber, newCarOwner]
     };

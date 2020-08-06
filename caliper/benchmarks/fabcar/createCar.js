@@ -35,13 +35,13 @@ module.exports.init = function(blockchain, context, args) {
 
 module.exports.run = function() {
     txIndex++;
-    let carNumber = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + txIndex.toString();
-    let carColor = colors[Math.floor(Math.random() * colors.length)];
-    let carMake = makes[Math.floor(Math.random() * makes.length)];
-    let carModel = models[Math.floor(Math.random() * models.length)];
-    let carOwner = owners[Math.floor(Math.random() * owners.length)];
+    const carNumber = helper.generateNumber(contx.clientIdx, `${name.hashCode()}${txIndex}`);
+    const carColor = colors[Math.floor(Math.random() * colors.length)];
+    const carMake = makes[Math.floor(Math.random() * makes.length)];
+    const carModel = models[Math.floor(Math.random() * models.length)];
+    const carOwner = owners[Math.floor(Math.random() * owners.length)];
 
-    let args = {
+    const args = {
         chaincodeFunction: 'createCar',
         chaincodeArguments: [carNumber, carMake, carModel, carColor, carOwner]
     };

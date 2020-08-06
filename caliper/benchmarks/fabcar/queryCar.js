@@ -27,16 +27,14 @@ module.exports.init = async function(blockchain, context, args) {
     contx = context;
     limitIndex = args.assets;
 
-    await helper.createCar(bc, contx, args, name.hashCode());
-
     return Promise.resolve();
 };
 
 module.exports.run = function() {
     txIndex++;
-    let carNumber = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + txIndex.toString();
+    const carNumber = helper.generateNumber(contx.clientIdx, txIndex);
 
-    let args = {
+    const args = {
         chaincodeFunction: 'queryCar',
         chaincodeArguments: [carNumber]
     };

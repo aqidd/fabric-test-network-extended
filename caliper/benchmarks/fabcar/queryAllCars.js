@@ -25,17 +25,15 @@ module.exports.init = async function (blockchain, context, args) {
     bc = blockchain;
     contx = context;
 
-    await helper.createCar(bc, contx, args, name.hashCode());
-
-    startingKey = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + args.startKey;
-    endingKey = 'Client' + contx.clientIdx + '_CAR' + name.hashCode() + args.endKey;
+    startingKey =  helper.generateNumber(contx.clientIdx, args.startKey);
+    endingKey = helper.generateNumber(contx.clientIdx, args.endKey);
 
     return Promise.resolve();
 };
 
 module.exports.run = function () {
 
-    let args = {
+    const args = {
         chaincodeFunction: 'queryAllCars',
         chaincodeArguments: [startingKey, endingKey]     
     };

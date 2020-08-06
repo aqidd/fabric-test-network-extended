@@ -20,6 +20,14 @@ test:
     type: local
     number: 5
   rounds:
+  - label: Init Ledger.
+    txNumber: 1
+    rateControl:
+      type: fixed-rate
+      opts: 
+        tps: 1
+    arguments:
+      assets: 25
   - label: Random Transactions.
     txDuration: 10
     rateControl:
