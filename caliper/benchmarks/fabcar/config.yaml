@@ -37,6 +37,8 @@ test:
         tps: 10
     arguments:
       assets: 25
+      startKey: '1'
+      endKey: '50'
     callback: ./benchmarks/fabcar/randomTx.js
   - label: Change car owner.
     txDuration: 10
