@@ -15,9 +15,13 @@ First you have to update .env files and make sure they point to the correct valu
 envVar.sh contains helper variables and functions. It should work after you update `.env` file but please check the content of this files to make sure that everything points to the correct path/value
 
 ### Running the script
-After you setup your test network + create channel + deploy fabcar chaincode, just execute `./extend-network.sh`.
+To run everything all at once, just execute `./setup-fabric-extended.sh`. It will download all the necessary Fabric components, binary and extend the test network.
+
+OR, if you already setup your test network + create channel + deploy fabcar chaincode, just execute `./extend-network.sh` to extend it.
 
 When you want to decompose the extended peers & orderer, simpy execute `./decompose-extension.sh`
 
 ### Benchmarking with Hyperledger Caliper
-`./setup.caliper.sh` - benchmark result will be inside `caliper` folder.
+`./setup.caliper.sh` - will setup all the necessary scripts for Hyperledger Caliper
+
+`./execute-caliper.sh` - will run Caliper benchmark
